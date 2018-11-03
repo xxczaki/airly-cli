@@ -1,0 +1,54 @@
+{
+  "name": "airly-cli",
+  "version": "1.0.0",
+  "description": "Get the latest info about air pollution in Poland!",
+  "main": "cli.js",
+  "bin": {
+    "airly": "cli.js"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xxczaki/airly-cli.git"
+  },
+  "keywords": [
+    "airly-cli",
+    "airly",
+    "smog",
+    "pollution",
+    "air",
+    "pollution",
+    "cli",
+    "terminal",
+    "app",
+    "package",
+    "node",
+    "nodejs",
+    "npm",
+    "xo"
+  ],
+  "author": "Antoni Kepinski <a@kepinski.me> (https://kepinski.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xxczaki/airly-cli/issues"
+  },
+  "homepage": "https://github.com/xxczaki/airly-cli#readme",
+  "devDependencies": {
+    "ava": "*",
+    "execa": "*",
+    "xo": "*"
+  },
+  "dependencies": {
+    "boxen": "^2.0.0",
+    "chalk": "^2.4.1",
+    "conf": "^2.0.0",
+    "ervy": "^1.0.2",
+    "first-run": "^1.2.0",
+    "got": "^9.3.0",
+    "meow": "^5.0.0",
+    "ora": "^3.0.0",
+    "prompts": "^1.2.0"
+  }
+}
