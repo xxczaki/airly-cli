@@ -5,7 +5,7 @@
 [![Build Status](https://travis-ci.org/xxczaki/airly-cli.svg?branch=master)](https://travis-ci.org/xxczaki/airly-cli) 
 [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/xojs/xo) 
 
-![Animated SVG](https://rawcdn.githack.com/xxczaki/airly-cli/master/animated.svg)
+![Animated SVG](https://rawcdn.githack.com/xxczaki/airly-cli/a00f723e5721cf0aa9600297767f99a53dc638aa/animated.svg)
 
 ---
 
