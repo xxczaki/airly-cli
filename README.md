@@ -20,14 +20,14 @@ npm install --global airly-cli
 
 ## Usage
 ```bash
-	Usage
-	  $ airly <options>
-    Options
-      --installation, -i    Specify installation id
-      --reset, -r           Reset API key
-	Examples
-      $ airly --installation 204
-      $ airly -r
+Usage
+     $ airly <options>
+Options
+     --installation, -i    Specify installation id
+     --reset, -r           Reset API key
+Examples
+     $ airly --installation 204
+     $ airly -r
 ```
 
 ### License
