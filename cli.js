@@ -69,7 +69,7 @@ const startId = async () => {
 
 		spinner.succeed('Done:\n');
 
-		const data = data.filter(item => (
+		const data = pollutions.body.current.values.filter(item => (
 			item.name === 'PM1' || item.name === 'PM25' || item.name === 'PM10'
 		));
 
@@ -142,11 +142,11 @@ const startLocation = () => {
 
 				spinner.succeed('Done:\n');
 
-				const data = pollutions.body.current.values.map(el => ({...el, key: el.name}));
-
-				const newData = data.filter(item => (
+				const data = pollutions.body.current.values.filter(item => (
 					item.name === 'PM1' || item.name === 'PM25' || item.name === 'PM10'
 				));
+
+				const newData = data.map(el => ({...el, key: el.name}));
 
 				// Show user the table with envy
 				console.log(boxen(
