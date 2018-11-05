@@ -24,15 +24,15 @@ npm install --global airly-cli
 
 ```bash
 	Usage
-	  $ airly <options>
+	   $ airly <options>
 	Options
-	  --city, -c    		Search using city name
-	  --installation, -i    Search using specific sensor id
-        --reset, -r           Reset API key
+	   --city, -c    		Search using city name
+	   --installation, -i    Search using specific sensor id
+         --reset, -r           Reset API key
 	Examples
-	  $ airly --city Krakow
-        $ airly --installation 204
-        $ airly -r
+	   $ airly --city Krakow
+         $ airly --installation 204
+         $ airly -r
 ```
 
 ### License
