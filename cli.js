@@ -52,14 +52,14 @@ const startId = async () => {
 	try {
 		spinner.start('Fetching data...');
 
-		// Fetch data from airly api
-		const response = await got(`https://airapi.airly.eu/v2/measurements/installation?installationId=${cli.flags.installation}`, {
+		// Fetch pollution data from airly api
+		const pollutions = await got(`https://airapi.airly.eu/v2/measurements/installation?installationId=${cli.flags.installation}`, {
 			headers: {
 				apikey: `${config.get('key')}`
 			},
 			json: true
 		});
-
+		// Fetch installation info from airly api
 		const id = await got(`https://airapi.airly.eu/v2/installations/${cli.flags.installation}`, {
 			headers: {
 				apikey: `${config.get('key')}`
@@ -69,12 +69,18 @@ const startId = async () => {
 
 		spinner.succeed('Done:\n');
 
-		const data = response.body.current.values.slice(0, -3).map(el => ({...el, key: el.name}));
+		const data = data.filter(item => (
+			item.name === 'PM1' || item.name === 'PM25' || item.name === 'PM10'
+		));
 
+		const newData = data.map(el => ({...el, key: el.name}));
+
+		// Show user the table with envy
 		console.log(boxen(
-			`Particulate Matter (PM) in μg/m3:\n\n${bar(data, {style: `${chalk.green('+')}`, padding: 3, barWidth: 5})} \n\n${chalk.dim.gray(`[Data from sensor nr. ${id.body.id} located in ${id.body.address.street}, ${id.body.address.city}, ${id.body.address.country}]`)}`
+			`Particulate Matter (PM) in μg/m3:\n\n${bar(newData, {style: `${chalk.green('+')}`, padding: 3, barWidth: 5})} \n\n${chalk.dim.gray(`[Data from sensor nr. ${id.body.id} located in ${id.body.address.street}, ${id.body.address.city}, ${id.body.address.country}]`)}`
 			, {padding: 1, borderColor: 'yellow', borderStyle: 'round'}));
 
+		// Some info about air quality guidelines
 		console.log('\nAir quality guidelines recommended by WHO (24-hour mean):\n');
 		console.log(`${chalk.cyan('›')} PM 10: 50 μg/m3`);
 		console.log(`${chalk.cyan('›')} PM 2.5: 25 μg/m3`);
@@ -88,18 +94,19 @@ const startId = async () => {
 // Search by city
 const startLocation = () => {
 	try {
+		// Get coordinates from provided location
 		getCoords(cli.flags.city)
 			.then(async coords => {
 				const {lat, lng} = coords;
 
-				// Fetch data from airly api
-				const search = await got(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxResults=3`, {
+				// Search for the nearest installation
+				const search = await got(`https://airapi.airly.eu/v2/installations/nearest?lat=${lat}&lng=${lng}&maxResults=3&maxDistanceKM=-1`, {
 					headers: {
 						apikey: `${config.get('key')}`
 					},
 					json: true
 				});
-
+				// Select the installation
 				const sensor = search.body.map(v => v.id);
 				const address = search.body.map(v => v.address.street);
 
@@ -114,8 +121,10 @@ const startLocation = () => {
 					],
 					initial: 1
 				});
+
 				spinner.start('Fetching data...');
 
+				// Fetch pollution data from airly api
 				const pollutions = await got(`https://airapi.airly.eu/v2/measurements/installation?installationId=${response.value}`, {
 					headers: {
 						apikey: `${config.get('key')}`
@@ -123,6 +132,7 @@ const startLocation = () => {
 					json: true
 				});
 
+				// Fetch installation info from airly api
 				const id = await got(`https://airapi.airly.eu/v2/installations/${response.value}`, {
 					headers: {
 						apikey: `${config.get('key')}`
@@ -132,12 +142,18 @@ const startLocation = () => {
 
 				spinner.succeed('Done:\n');
 
-				const data = pollutions.body.current.values.slice(0, -3).map(el => ({...el, key: el.name}));
+				const data = pollutions.body.current.values.map(el => ({...el, key: el.name}));
 
+				const newData = data.filter(item => (
+					item.name === 'PM1' || item.name === 'PM25' || item.name === 'PM10'
+				));
+
+				// Show user the table with envy
 				console.log(boxen(
-					`Particulate Matter (PM) in μg/m3:\n\n${bar(data, {style: `${chalk.green('+')}`, padding: 3, barWidth: 5})} \n\n${chalk.dim.gray(`[Data from sensor nr. ${id.body.id} located in ${id.body.address.street}, ${id.body.address.city}, ${id.body.address.country}]`)}`
+					`Particulate Matter (PM) in μg/m3:\n\n${bar(newData, {style: `${chalk.green('+')}`, padding: 3, barWidth: 5})} \n\n${chalk.dim.gray(`[Data from sensor nr. ${id.body.id} located in ${id.body.address.street}, ${id.body.address.city}, ${id.body.address.country}]`)}`
 					, {padding: 1, borderColor: 'yellow', borderStyle: 'round'}));
 
+				// Some info about air quality guidelines
 				console.log('\nAir quality guidelines recommended by WHO (24-hour mean):\n');
 				console.log(`${chalk.cyan('›')} PM 10: 50 μg/m3`);
 				console.log(`${chalk.cyan('›')} PM 2.5: 25 μg/m3`);

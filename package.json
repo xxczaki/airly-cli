@@ -1,6 +1,6 @@
 {
   "name": "airly-cli",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Get the latest info about air pollution in Poland!",
   "main": "cli.js",
   "bin": {
@@ -47,7 +47,7 @@
     "conf": "^2.0.0",
     "ervy": "^1.0.2",
     "first-run": "^1.2.0",
-    "got": "^9.3.0",
+    "got": "^9.3.1",
     "meow": "^5.0.0",
     "ora": "^3.0.0",
     "prompts": "^1.2.0"
