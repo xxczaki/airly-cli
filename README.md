@@ -28,11 +28,11 @@ npm install --global airly-cli
 	Options
 	   --city, -c    		Search using city name
 	   --installation, -i    Search using specific sensor id
-         --reset, -r           Reset API key
+           --reset, -r           Reset API key
 	Examples
 	   $ airly --city Krakow
-         $ airly --installation 204
-         $ airly -r
+           $ airly --installation 204
+           $ airly -r
 ```
 
 ### License
