@@ -7,7 +7,7 @@
     "airly": "cli.js"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo"
   },
   "repository": {
     "type": "git",
@@ -36,8 +36,6 @@
   },
   "homepage": "https://github.com/xxczaki/airly-cli#readme",
   "devDependencies": {
-    "ava": "*",
-    "execa": "*",
     "xo": "*"
   },
   "dependencies": {
